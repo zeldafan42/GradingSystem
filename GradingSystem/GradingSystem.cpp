@@ -20,10 +20,8 @@
 using namespace std;
 
 void printMenu();
-int addPerson();
-int findPerson();
+int getPersonOption(string action);
 int getNumber();
-string readName();
 string readName(string specific);
 void printTable(map<string,Student*>* table);
 void printTable(map<string,Teacher*>* table);
@@ -51,11 +49,11 @@ int main()
 		switch(menuChoice)
 		{	case 1:
 			{
-					studentOrTeacher = person("Add");
+					studentOrTeacher = getPersonOption("Add");
 
 					if(studentOrTeacher==1)
 					{
-						name = readName();
+						name = readName("student");
 						currentStudent = new Student(name);
 
 						studentTable.insert(pair<string,Student*>(name,currentStudent));
@@ -63,14 +61,14 @@ int main()
 					}
 					else if(studentOrTeacher == 2)
 					{
-						name = readName();
+						name = readName("teacher");
 						currentTeacher = new Teacher(name);
 
 						teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
 
 						while(true)
 						{
-							name = readName();
+							name = readName("course");
 
 							if(name != "0")
 							{
@@ -95,17 +93,17 @@ int main()
 
 			case 2:
 				{
-					studentOrTeacher = person("Find");
+					studentOrTeacher = getPersonOption("Find");
 
 					if(studentOrTeacher==1)
 					{
-						name = readName();
+						name = readName("student");
 						studentTable.find(name);
 						break;
 					}
 					else if(studentOrTeacher == 2)
 					{
-						name = readName();
+						name = readName("teacher");
 
 						teacherTable.find(name);
 						break;
@@ -159,7 +157,7 @@ void printMenu()
 	cout << "1. Add person\n2. Find person\n3. Show people\n4. Grade student\n5. Quit\n> " << endl;
 }
 
-int person(string action)
+int getPersonOption(string action)
 {
 	int input = 0;
 
@@ -176,29 +174,13 @@ int person(string action)
 	return input;
 }
 
-
-string readName()
-{
-	string name = "";
-	cout << "Please enter the name: " << endl << "> ";
-	cin >> name;
-
-	while(name=="")
-	{
-		cout << "Wrong input!\nPlease enter the name: " << endl << "> ";
-		cin >> name;
-	}
-
-	return name;
-}
-
 string readName(string specific)
 {
 	string name = "";
 	cout << "Please enter the name of the " << specific << ": " << endl << "> ";
 	cin >> name;
 
-	while(name=="")
+	while(name == "")
 	{
 		cout << "Wrong input!\nPlease enter the name of the " << specific << ": " << endl << "> ";
 		cin >> name;
