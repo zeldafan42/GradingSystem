@@ -54,7 +54,7 @@ int main()
 			{
 					studentOrTeacher = getPersonOption("Add");
 
-					if(studentOrTeacher==1)
+					if(studentOrTeacher == 1)
 					{
 						name = readName("student");
 						currentStudent = new Student(name);
@@ -71,7 +71,7 @@ int main()
 
 						while(true)
 						{
-							name = readName("course");
+							name = readName("course (0 to exit)");
 
 							if(name != "0")
 							{
@@ -101,14 +101,33 @@ int main()
 					if(studentOrTeacher==1)
 					{
 						name = readName("student");
-						studentTable.find(name);
+						auto it = studentTable.find(name);
+
+						if(it == studentTable.end())
+						{
+							cout << "Person not found." << endl;
+						}
+						else
+						{
+							it->second->printPerson();
+						}
+
 						break;
 					}
 					else if(studentOrTeacher == 2)
 					{
 						name = readName("teacher");
+						auto it = teacherTable.find(name);
 
-						teacherTable.find(name);
+						if(it == teacherTable.end())
+						{
+							cout << "Person not found." << endl;
+						}
+						else
+						{
+							it->second->printPerson();
+						}
+
 						break;
 					}
 					else
