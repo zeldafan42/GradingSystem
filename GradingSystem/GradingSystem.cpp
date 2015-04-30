@@ -132,10 +132,22 @@ int main()
 					name = readName("student");
 					auto it1 = studentTable.find(name);
 
+					if(it1 == studentTable.end())
+					{
+						cout << "Could not find student!" << endl;
+						break;
+					}
+
 					currentStudent = it1->second;
+
 
 					name = readName("course");
 					auto it2 = courseTable.find(name);
+					if(it2 == courseTable.end())
+					{
+						cout << "Could not find course!" << endl;
+						break;
+					}
 					currentCourse = it2->second;
 
 					currentGrade = readGrade();
@@ -149,11 +161,23 @@ int main()
 
 			case 5:
 				{
+					for(auto it = studentTable.begin(); it != studentTable.end(); ++it)
+					{
+						delete it->second;
+					}
+					for(auto it = teacherTable.begin(); it != teacherTable.end(); ++it)
+					{
+						delete it->second;
+					}
+					for(auto it = courseTable.begin(); it != courseTable.end(); ++it)
+					{
+						delete it->second;
+					}
 					return 0;
 				}
 
 			default:
-					cout << "Wrong input!\nPlease select an option from 1 to 5" << endl;
+					cout << "Wrong input!" << endl <<"Please select an option from 1 to 5" << endl;
 					break;
 		}
 	}
@@ -164,20 +188,20 @@ int main()
 
 void printMenu()
 {
-	cout << "1. Add person\n2. Find person\n3. Show people\n4. Grade student\n5. Quit\n> " << endl;
+	cout << "1. Add person" << endl << "2. Find person" << endl << "3. Show people" << endl << "4. Grade student" << endl << "5. Quit" << endl <<"> " << endl;
 }
 
 int getPersonOption(string action)
 {
 	int input = 0;
 
-	cout << "1. " << action << " student\n2. " << action << " teacher" << endl << "> ";
+	cout << "1. " << action << " student" << endl << "2. " << action << " teacher" << endl << "> ";
 	input  = getNumber();
 
 	while(input!=1 && input!=2)
 	{
-		cout << "Wrong input!\nPlease select an option from 1 to 2" << endl;
-		cout << "1. " << action << " student\n2. " << action << " teacher" << endl << "> ";
+		cout << "Wrong input!" << endl << "Please select an option from 1 to 2" << endl;
+		cout << "1. " << action << " student" << endl << "2. " << action << " teacher" << endl << "> ";
 		input  = getNumber();
 	}
 
@@ -192,7 +216,7 @@ string readName(string specific)
 
 	while(name == "")
 	{
-		cout << "Wrong input!\nPlease enter the name of the " << specific << ": " << endl << "> ";
+		cout << "Wrong input!" << endl << "Please enter the name of the " << specific << ": " << endl << "> ";
 		cin >> name;
 	}
 
@@ -231,7 +255,7 @@ int getNumber()
 	{
 	    cin.clear(); //clear bad input flag
 	    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
-	    cout << "Invalid input; please re-enter.\n";
+	    cout << "Invalid input; please re-enter." << endl;
 	}
 	return num;
 }

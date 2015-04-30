@@ -15,7 +15,7 @@ class GradedCourse
 {
 public:
 	void printCourse() const;
-	GradedCourse(int grade, Course * course);
+	GradedCourse(Course * course, int grade);
 	void gradeStudent(int grade);
 
 private:

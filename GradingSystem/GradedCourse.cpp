@@ -14,7 +14,7 @@
 
 using namespace std;
 
-GradedCourse::GradedCourse(int grade, Course * course)
+GradedCourse::GradedCourse(Course * course, int grade)
 {
 	this->grade = grade;
 	this->course = course;

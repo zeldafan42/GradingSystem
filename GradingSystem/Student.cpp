@@ -38,5 +38,10 @@ void Student::addGradedCourse(const GradedCourse * course)
 
 Student::~Student()
 {
+	while(!courses.empty())
+	{
+		delete courses.front();
+		courses.pop_front();
+	}
 }
 

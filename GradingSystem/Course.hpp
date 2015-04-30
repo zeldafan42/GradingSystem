@@ -8,7 +8,6 @@
 
 #ifndef COURSE_HPP_
 #define COURSE_HPP_
-#include <unordered_map>
 #include <iostream>
 
 using namespace std;
