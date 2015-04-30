@@ -26,6 +26,11 @@ void GradedCourse::printCourse() const
 	cout << ": " << grade;
 }
 
+bool GradedCourse::isCourse(const Course * course) const
+{
+	return course == this->course;
+}
+
 void GradedCourse::gradeStudent(int grade)
 {
 

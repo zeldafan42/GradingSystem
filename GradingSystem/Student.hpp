@@ -19,10 +19,12 @@ class Student: public Person
 	Student(const string &name);
 	virtual ~Student();
 	void printPerson() const;
-	void addGradedCourse(const GradedCourse * course);
+	void addGradedCourse(GradedCourse * course);
+	bool hasCourse(const Course * course) const;
+	void updateGrade(const Course * course, int grade);
 
 	private:
-	forward_list<const GradedCourse*> courses;
+	forward_list<GradedCourse*> courses;
 };
 
 #endif /* STUDENT_HPP_ */

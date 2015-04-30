@@ -31,7 +31,31 @@ void Student::printPerson() const
 	cout << ")" << endl;
 }
 
-void Student::addGradedCourse(const GradedCourse * course)
+bool Student::hasCourse(const Course * course) const
+{
+	bool found = false;
+	for(auto it = courses.begin(); it != courses.end(); ++it)
+	{
+		if((*it)->isCourse(course))
+		{
+			found = true;
+		}
+	}
+	return found;
+}
+
+void Student::updateGrade(const Course * course, int grade)
+{
+	for(auto it = courses.begin(); it != courses.end(); ++it)
+	{
+		if((*it)->isCourse(course))
+		{
+			(*it)->gradeStudent(grade);
+		}
+	}
+}
+
+void Student::addGradedCourse(GradedCourse * course)
 {
 	courses.push_front(course);
 }

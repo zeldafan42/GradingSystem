@@ -57,32 +57,58 @@ int main()
 					if(studentOrTeacher == 1)
 					{
 						name = readName("student");
-						currentStudent = new Student(name);
+						auto it = studentTable.find(name);
+						if(it == studentTable.end())
+						{
+							currentStudent = new Student(name);
+							studentTable.insert(pair<string,Student*>(name,currentStudent));
+						}
+						else
+						{
+							cout << "Person already exists!" << endl;
+							break;
+						}
 
-						studentTable.insert(pair<string,Student*>(name,currentStudent));
 						break;
 					}
 					else if(studentOrTeacher == 2)
 					{
 						name = readName("teacher");
-						currentTeacher = new Teacher(name);
-
-						teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
-
-						while(true)
+						auto it = teacherTable.find(name);
+						if(it == teacherTable.end())
 						{
-							name = readName("course (0 to exit)");
+							currentTeacher = new Teacher(name);
 
-							if(name != "0")
+							teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
+
+							while(true)
 							{
-								currentCourse = new Course(name);
-								currentTeacher->addCourse(currentCourse);
-								courseTable.insert(pair<string,Course*>(name,currentCourse));
+								name = readName("course (0 to exit)");
+
+								if(name != "0")
+								{
+									auto it = courseTable.find(name);
+									if(it == courseTable.end())
+									{
+										currentCourse = new Course(name);
+										currentTeacher->addCourse(currentCourse);
+										courseTable.insert(pair<string,Course*>(name,currentCourse));
+									}
+									else
+									{
+										cout << "Course already exists!" << endl;
+									}
+								}
+								else
+								{
+									break;
+								}
 							}
-							else
-							{
-								break;
-							}
+						}
+						else
+						{
+							cout << "Person already exists!" << endl;
+							break;
 						}
 
 						break;
@@ -171,9 +197,15 @@ int main()
 
 					currentGrade = readGrade();
 
-					currentGradedCourse = new GradedCourse(currentCourse,currentGrade);
-
-					currentStudent->addGradedCourse(currentGradedCourse);
+					if(currentStudent->hasCourse(currentCourse))
+					{
+						currentStudent->updateGrade(currentCourse,currentGrade);
+					}
+					else
+					{
+						currentGradedCourse = new GradedCourse(currentCourse,currentGrade);
+						currentStudent->addGradedCourse(currentGradedCourse);
+					}
 
 					break;
 				}
@@ -273,7 +305,7 @@ int getNumber()
 	while (!(cin >> num))
 	{
 	    cin.clear(); //clear bad input flag
-	    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+	    cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
 	    cout << "Invalid input; please re-enter." << endl;
 	}
 	return num;

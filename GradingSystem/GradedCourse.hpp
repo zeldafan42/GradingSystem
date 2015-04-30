@@ -17,6 +17,7 @@ public:
 	void printCourse() const;
 	GradedCourse(Course * course, int grade);
 	void gradeStudent(int grade);
+	bool isCourse(const Course * course) const;
 
 private:
 	int grade;
