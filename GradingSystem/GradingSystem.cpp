@@ -46,108 +46,106 @@ int main()
 		printMenu();
 		cin >> menuChoice;
 
-		if(menuChoice>0 && menuChoice<5)
-		{
-			if(menuChoice == 1)
+		switch(menuChoice)
+		{	case 1:
 			{
-				studentOrTeacher = addPerson();
+					studentOrTeacher = addPerson();
 
-				if(studentOrTeacher==1)
+					if(studentOrTeacher==1)
+					{
+						name = readName();
+						currentStudent = new Student(name);
+
+						studentTable.insert(pair<string,Student*>(name,currentStudent));
+						continue;
+					}
+					else if(studentOrTeacher == 2)
+					{
+						name = readName();
+						currentTeacher = new Teacher(name);
+
+						teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
+
+						while(true)
+						{
+							name = readName();
+
+							if(name != "0")
+							{
+								currentCourse = new Course(name);
+								currentTeacher->addCourse(currentCourse);
+								courseTable.insert(pair<string,Course*>(name,currentCourse));
+							}
+							else
+							{
+								break;
+							}
+						}
+
+						continue;
+					}
+					else
+					{
+						cerr << "Error: function addPerson() did not return 1 or 2" << endl;
+						continue;
+					}
+			}
+
+			case 2:
 				{
-					name = readName();
-					currentStudent = new Student(name);
+					studentOrTeacher = findPerson();
 
-					studentTable.insert(pair<string,Student*>(name,currentStudent));
-					continue;
-				}
-				else if(studentOrTeacher == 2)
-				{
-					name = readName();
-					currentTeacher = new Teacher(name);
-
-					teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
-
-					while(true)
+					if(studentOrTeacher==1)
+					{
+						name = readName();
+						studentTable.find(name);
+						continue;
+					}
+					else if(studentOrTeacher == 2)
 					{
 						name = readName();
 
-						if(name != "0")
-						{
-							currentCourse = new Course(name);
-							currentTeacher->addCourse(currentCourse);
-							courseTable.insert(pair<string,Course*>(name,currentCourse));
-						}
+						teacherTable.find(name);
+						continue;
 					}
-
-					continue;
+					else
+					{
+						cerr << "Error: function findPerson() did not return 1 or 2" << endl;
+						continue;
+					}
 				}
-				else
+			case 3:
 				{
-					cerr << "Error: function addPerson() did not return 1 or 2" << endl;
+					cout << "--------------------------------------------" << endl;
+					cout << "                TEACHER LIST" << endl;
+					printTable(&teacherTable);
+					cout << "--------------------------------------------" << endl;
+					cout << "                STUDENT LIST" << endl;
+					printTable(&studentTable);
 					continue;
 				}
-			}
-			else if(menuChoice == 2)
-			{
-				studentOrTeacher = findPerson();
-
-				if(studentOrTeacher==1)
+			case 4:
 				{
-					name = readName();
-					studentTable.find(name);
-					continue;
+					name = readName("student");
+					auto it1 = studentTable.find(name);
+
+					currentStudent = it1->second;
+
+					name = readName("course");
+					auto it2 = courseTable.find(name);
+					currentCourse = it2->second;
+
 				}
-				else if(studentOrTeacher == 2)
+
+			case 5:
 				{
-					name = readName();
-
-					teacherTable.find(name);
-					continue;
+					break;
 				}
-				else
-				{
-					cerr << "Error: function findPerson() did not return 1 or 2" << endl;
-					continue;
-				}
-			}
-			else if(menuChoice == 3)
-			{
-				cout << "--------------------------------------------" << endl;
-				cout << "                TEACHER LIST" << endl;
-				printTable(&teacherTable);
-				cout << "--------------------------------------------" << endl;
-				cout << "                STUDENT LIST" << endl;
-				printTable(&studentTable);
-				continue;
-			}
-			else if(menuChoice == 4)
-			{
-				name = readName("student");
-				auto it1 = studentTable.find(name);
 
-				currentStudent = it1->second;
-
-				name = readName("course");
-				auto it2 = courseTable.find(name);
-				currentCourse = it2->second;
-
-			}
-
-		}
-		else
-		{
-			if(menuChoice == 5)
-			{
-				break;
-			}
-			else
-			{
-				cout << "Wrong input!\nPlease select an option from 1 to 5" << endl;
-			}
+			default:
+					cout << "Wrong input!\nPlease select an option from 1 to 5" << endl;
 		}
 	}
-
-
 
 	return 0;
 }
