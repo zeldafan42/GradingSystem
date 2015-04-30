@@ -24,10 +24,7 @@ public:
 private:
 	string name;
 
-
 };
-
-
 
 
 #endif /* COURSE_HPP_ */

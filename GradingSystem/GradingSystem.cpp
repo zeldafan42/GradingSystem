@@ -18,12 +18,24 @@
 
 using namespace std;
 
+void printMenu();
+int addPerson();
+int findPerson();
+string readName();
+string readName(string specific);
+void printTable(map<string,Student*>* table);
+void printTable(map<string,Teacher*>* table);
+
+
 int main()
 {
 	int menuChoice = 0;
 	int studentOrTeacher = 0;
 
 	string name = "";
+	Teacher* currentTeacher;
+	Course* currentCourse;
+	Student* currentStudent;
 
 	map<string,Student*> studentTable;
 	map<string,Teacher*> teacherTable;
@@ -43,15 +55,15 @@ int main()
 				if(studentOrTeacher==1)
 				{
 					name = readName();
+					currentStudent = new Student(name);
 
-					studentTable.insert(pair<string,Student*>(name,Student(name)));
+					studentTable.insert(pair<string,Student*>(name,currentStudent));
 					continue;
 				}
 				else if(studentOrTeacher == 2)
 				{
 					name = readName();
-					Teacher* currentTeacher = new Teacher(name);
-					Course* currentCourse;
+					currentTeacher = new Teacher(name);
 
 					teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
 
@@ -77,8 +89,6 @@ int main()
 			}
 			else if(menuChoice == 2)
 			{
-
-
 				studentOrTeacher = findPerson();
 
 				if(studentOrTeacher==1)
@@ -108,9 +118,20 @@ int main()
 				cout << "--------------------------------------------" << endl;
 				cout << "                STUDENT LIST" << endl;
 				printTable(&studentTable);
+				continue;
+			}
+			else if(menuChoice == 4)
+			{
+				name = readName("student");
+				auto it1 = studentTable.find(name);
+
+				currentStudent = it1->second;
+
+				name = readName("course");
+				auto it2 = courseTable.find(name);
+				currentCourse = it2->second;
 
 			}
-
 
 		}
 		else
@@ -180,6 +201,21 @@ string readName()
 	while(name=="")
 	{
 		cout << "Wrong input!\nPlease enter the name: " << endl << "> ";
+		cin >> name;
+	}
+
+	return name;
+}
+
+string readName(string specific)
+{
+	string name = "";
+	cout << "Please enter the name of the " << specific << ": " << endl << "> ";
+	cin >> name;
+
+	while(name=="")
+	{
+		cout << "Wrong input!\nPlease enter the name of the " << specific << ": " << endl << "> ";
 		cin >> name;
 	}
 
