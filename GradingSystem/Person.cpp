@@ -19,6 +19,5 @@ Person::Person(const string &name)
 
 Person::~Person()
 {
-	// TODO Auto-generated destructor stub
 }
 

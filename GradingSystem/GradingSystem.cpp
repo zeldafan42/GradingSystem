@@ -14,6 +14,7 @@
 #include "GradedCourse.hpp"
 #include <forward_list>
 #include <map>
+#include <limits>
 
 
 using namespace std;
@@ -21,6 +22,7 @@ using namespace std;
 void printMenu();
 int addPerson();
 int findPerson();
+int getNumber();
 string readName();
 string readName(string specific);
 void printTable(map<string,Student*>* table);
@@ -44,7 +46,7 @@ int main()
 	while(true)
 	{
 		printMenu();
-		cin >> menuChoice;
+		menuChoice = getNumber();
 
 		switch(menuChoice)
 		{	case 1:
@@ -57,7 +59,7 @@ int main()
 						currentStudent = new Student(name);
 
 						studentTable.insert(pair<string,Student*>(name,currentStudent));
-						continue;
+						break;
 					}
 					else if(studentOrTeacher == 2)
 					{
@@ -82,12 +84,12 @@ int main()
 							}
 						}
 
-						continue;
+						break;
 					}
 					else
 					{
 						cerr << "Error: function addPerson() did not return 1 or 2" << endl;
-						continue;
+						break;
 					}
 			}
 
@@ -99,19 +101,19 @@ int main()
 					{
 						name = readName();
 						studentTable.find(name);
-						continue;
+						break;
 					}
 					else if(studentOrTeacher == 2)
 					{
 						name = readName();
 
 						teacherTable.find(name);
-						continue;
+						break;
 					}
 					else
 					{
 						cerr << "Error: function findPerson() did not return 1 or 2" << endl;
-						continue;
+						break;
 					}
 				}
 			case 3:
@@ -122,7 +124,7 @@ int main()
 					cout << "--------------------------------------------" << endl;
 					cout << "                STUDENT LIST" << endl;
 					printTable(&studentTable);
-					continue;
+					break;
 				}
 			case 4:
 				{
@@ -134,16 +136,17 @@ int main()
 					name = readName("course");
 					auto it2 = courseTable.find(name);
 					currentCourse = it2->second;
-
+					break;
 				}
 
 			case 5:
 				{
-					break;
+					return 0;
 				}
 
 			default:
 					cout << "Wrong input!\nPlease select an option from 1 to 5" << endl;
+					break;
 		}
 	}
 
@@ -161,13 +164,13 @@ int addPerson()
 	int input = 0;
 
 	cout << "1. Add student\n2. Add teacher" << endl << "> ";
-	cin >> input;
+	input  = getNumber();
 
 	while(input!=1 && input!=2)
 	{
 		cout << "Wrong input!\nPlease select an option from 1 to 2" << endl;
 		cout << "1. Add student\n2. Add teacher" << endl << "> ";
-		cin >> input;
+		input  = getNumber();
 	}
 
 	return input;
@@ -178,13 +181,13 @@ int findPerson()
 	int input = 0;
 
 	cout << "1. Find student\n2. Find teacher" << endl << "> ";
-	cin >> input;
+	input  = getNumber();
 
 	while(input!=1 && input!=2)
 	{
 		cout << "Wrong input!\nPlease select an option from 1 to 2" << endl;
 		cout << "1. Find student\n2. Find teacher" << endl << "> ";
-		cin >> input;
+		input  = getNumber();
 	}
 
 	return input;
@@ -234,4 +237,16 @@ void printTable(map<string,Teacher*>* table)
 	{
 		it->second->printPerson();
 	}
+}
+
+int getNumber()
+{
+	int num = 0;
+	while (!(cin >> num))
+	{
+	    cin.clear(); //clear bad input flag
+	    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+	    cout << "Invalid input; please re-enter.\n";
+	}
+	return num;
 }
