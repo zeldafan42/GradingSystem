@@ -23,6 +23,7 @@ void printMenu();
 int getPersonOption(string action);
 int getNumber();
 string readName(string specific);
+int readGrade();
 void printTable(map<string,Student*>* table);
 void printTable(map<string,Teacher*>* table);
 
@@ -31,11 +32,13 @@ int main()
 {
 	int menuChoice = 0;
 	int studentOrTeacher = 0;
+	int currentGrade = 0;
 
 	string name = "";
 	Teacher* currentTeacher;
 	Course* currentCourse;
 	Student* currentStudent;
+	GradedCourse* currentGradedCourse;
 
 	map<string,Student*> studentTable;
 	map<string,Teacher*> teacherTable;
@@ -134,6 +137,13 @@ int main()
 					name = readName("course");
 					auto it2 = courseTable.find(name);
 					currentCourse = it2->second;
+
+					currentGrade = readGrade();
+
+					currentGradedCourse = new GradedCourse(currentCourse,currentGrade);
+
+					currentStudent->addGradedCourse(currentGradedCourse);
+
 					break;
 				}
 
@@ -187,6 +197,15 @@ string readName(string specific)
 	}
 
 	return name;
+}
+
+int readGrade()
+{
+	int grade = 0;
+	cout << "Please enter the grade: " << endl << "> ";
+	grade = getNumber();
+
+	return grade;
 }
 
 void printTable(map<string,Student*>* table)
