@@ -12,7 +12,30 @@ Student::Student(const string &name) : Person(name)
 {
 }
 
-Student::~Student() {
-	// TODO Auto-generated destructor stub
+void Student::printPerson() const
+{
+	cout << name << " (Student";
+	if(!courses.empty())
+	{
+		cout << ": ";
+		auto it = courses.begin();
+		(*it)->printCourse();
+		++it;
+		for (; it != courses.end(); ++it )
+		{
+			cout  << ", ";
+			(*it)->printCourse();
+		}
+	}
+	cout << ")" << endl;
+}
+
+void Student::addGradedCourse(const GradedCourse * course)
+{
+	courses.push_front(course);
+}
+
+Student::~Student()
+{
 }
 

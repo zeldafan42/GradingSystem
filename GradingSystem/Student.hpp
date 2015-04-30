@@ -9,11 +9,19 @@
 #define STUDENT_HPP_
 
 #include "Person.hpp"
+#include "GradedCourse.hpp"
+#include <forward_list>
 
-class Student: public Person {
-public:
+class Student: public Person
+{
+	public:
 	Student(const string &name);
 	virtual ~Student();
+	void printPerson() const;
+	void addGradedCourse(const GradedCourse * course);
+
+	private:
+	forward_list<const GradedCourse*> courses;
 };
 
 #endif /* STUDENT_HPP_ */

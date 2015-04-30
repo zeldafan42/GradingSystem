@@ -17,14 +17,18 @@ Teacher::Teacher(const string &name) : Person(name)
 
 void Teacher::printPerson() const
 {
-	cout << name << " (Teacher: ";
-	auto it = courses.begin();
-	(*it)->printCourse();
-	++it;
-	for (; it != courses.end(); ++it )
+	cout << name << " (Teacher";
+	if(!courses.empty())
 	{
-		cout  << ", ";
+		cout << ": ";
+		auto it = courses.begin();
 		(*it)->printCourse();
+		++it;
+		for (; it != courses.end(); ++it )
+		{
+			cout  << ", ";
+			(*it)->printCourse();
+		}
 	}
 	cout << ")" << endl;
 }
