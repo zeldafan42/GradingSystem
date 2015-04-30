@@ -15,7 +15,7 @@ using namespace std;
 class Person
 {
 public:
-	Person(string name);
+	Person(const string &name);
 	virtual void printPerson() const = 0;
 	virtual ~Person();
 

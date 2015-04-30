@@ -16,7 +16,7 @@ using namespace std;
 class Teacher : public Person
 {
 	public:
-		Teacher(string name);
+		Teacher(const string &name);
 		virtual ~Teacher();
 		void printPerson() const;
 		void addCourse(const Course * course);

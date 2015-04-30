@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Teacher::Teacher(string name) : Person(name)
+Teacher::Teacher(const string &name) : Person(name)
 {
 }
 

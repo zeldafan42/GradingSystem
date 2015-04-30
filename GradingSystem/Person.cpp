@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Person::Person(string name)
+Person::Person(const string &name)
 {
 	this->name = name;
 
