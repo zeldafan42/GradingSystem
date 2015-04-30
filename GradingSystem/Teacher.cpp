@@ -26,7 +26,7 @@ void Teacher::printPerson() const
 		cout  << ", ";
 		(*it)->printCourse();
 	}
-
+	cout << ")" << endl;
 }
 
 void Teacher::addCourse(const Course * course)

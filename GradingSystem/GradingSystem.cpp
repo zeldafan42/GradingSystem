@@ -50,8 +50,23 @@ int main()
 				else if(studentOrTeacher == 2)
 				{
 					name = readName();
+					Teacher* currentTeacher = new Teacher(name);
+					Course* currentCourse;
 
-					teacherTable.insert(pair<string,Teacher*>(name,Teacher(name)));
+					teacherTable.insert(pair<string,Teacher*>(name,currentTeacher));
+
+					while(true)
+					{
+						name = readName();
+
+						if(name != "0")
+						{
+							currentCourse = new Course(name);
+							currentTeacher->addCourse(currentCourse);
+							courseTable.insert(pair<string,Course*>(name,currentCourse));
+						}
+					}
+
 					continue;
 				}
 				else
@@ -87,8 +102,12 @@ int main()
 			}
 			else if(menuChoice == 3)
 			{
-				printTable(teacherTable);
-				printTable(studentTable);
+				cout << "--------------------------------------------" << endl;
+				cout << "                TEACHER LIST" << endl;
+				printTable(&teacherTable);
+				cout << "--------------------------------------------" << endl;
+				cout << "                STUDENT LIST" << endl;
+				printTable(&studentTable);
 
 			}
 
@@ -167,9 +186,17 @@ string readName()
 	return name;
 }
 
-void printTable(map* table)
+void printTable(map<string,Student*>* table)
 {
-	for(auto it = table.begin();it != table.end(); ++it)
+	for(auto it = (*table).begin();it != (*table).end(); ++it)
+	{
+		it->second->printPerson();
+	}
+}
+
+void printTable(map<string,Teacher*>* table)
+{
+	for(auto it = (*table).begin();it != (*table).end(); ++it)
 	{
 		it->second->printPerson();
 	}
