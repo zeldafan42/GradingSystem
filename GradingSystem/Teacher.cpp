@@ -32,7 +32,6 @@ void Teacher::printPerson() const
 void Teacher::addCourse(const Course * course)
 {
 	courses.push_front(course);
-
 }
 
 
