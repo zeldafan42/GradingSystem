@@ -2,7 +2,8 @@
  * Student.cpp
  *
  *  Created on: 30.04.2015
- *      Author: Christine
+ *      Author: Christoph Majcen
+ *      		Arthur Bouz
  */
 
 #include "Student.hpp"

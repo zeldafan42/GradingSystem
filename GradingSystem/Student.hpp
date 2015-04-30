@@ -2,7 +2,8 @@
  * Student.hpp
  *
  *  Created on: 30.04.2015
- *      Author: Christine
+ *      Author: Christoph Majcen
+ *      		Arthur Bouz
  */
 
 #ifndef STUDENT_HPP_
