@@ -2,7 +2,8 @@
  * GradedCourse.hpp
  *
  *  Created on: 24.04.2015
- *      Author: Christine
+ *      Author: Christoph Majcen
+ *      		Arthur Bouz
  */
 
 #ifndef GRADEDCOURSE_HPP_

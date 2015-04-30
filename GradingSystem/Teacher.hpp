@@ -2,7 +2,8 @@
  * Teacher.hpp
  *
  *  Created on: 24.04.2015
- *      Author: Christine
+ *      Author: Christoph Majcen
+ *      		Arthur Bouz
  */
 
 #ifndef TEACHER_HPP_

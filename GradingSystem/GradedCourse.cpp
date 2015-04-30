@@ -2,7 +2,8 @@
  * GradedCourse.cpp
  *
  *  Created on: 24.04.2015
- *      Author: Christine
+ *      Author: Christoph Majcen
+ *      		Arthur Bouz
  */
 
 #define MAX_GRADE 5
