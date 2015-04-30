@@ -51,7 +51,7 @@ int main()
 		switch(menuChoice)
 		{	case 1:
 			{
-					studentOrTeacher = addPerson();
+					studentOrTeacher = person("Add");
 
 					if(studentOrTeacher==1)
 					{
@@ -95,7 +95,7 @@ int main()
 
 			case 2:
 				{
-					studentOrTeacher = findPerson();
+					studentOrTeacher = person("Find");
 
 					if(studentOrTeacher==1)
 					{
@@ -159,39 +159,23 @@ void printMenu()
 	cout << "1. Add person\n2. Find person\n3. Show people\n4. Grade student\n5. Quit\n> " << endl;
 }
 
-int addPerson()
+int person(string action)
 {
 	int input = 0;
 
-	cout << "1. Add student\n2. Add teacher" << endl << "> ";
+	cout << "1. " << action << " student\n2. " << action << " teacher" << endl << "> ";
 	input  = getNumber();
 
 	while(input!=1 && input!=2)
 	{
 		cout << "Wrong input!\nPlease select an option from 1 to 2" << endl;
-		cout << "1. Add student\n2. Add teacher" << endl << "> ";
+		cout << "1. " << action << " student\n2. " << action << " teacher" << endl << "> ";
 		input  = getNumber();
 	}
 
 	return input;
 }
 
-int findPerson()
-{
-	int input = 0;
-
-	cout << "1. Find student\n2. Find teacher" << endl << "> ";
-	input  = getNumber();
-
-	while(input!=1 && input!=2)
-	{
-		cout << "Wrong input!\nPlease select an option from 1 to 2" << endl;
-		cout << "1. Find student\n2. Find teacher" << endl << "> ";
-		input  = getNumber();
-	}
-
-	return input;
-}
 
 string readName()
 {
