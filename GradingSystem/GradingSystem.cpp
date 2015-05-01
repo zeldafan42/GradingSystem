@@ -263,12 +263,12 @@ string readName(string specific)
 {
 	string name = "";
 	cout << "Please enter the name of the " << specific << ": " << endl << "> ";
-	cin >> name;
+	getline(cin,name);
 
 	while(name == "")
 	{
 		cout << "Wrong input!" << endl << "Please enter the name of the " << specific << ": " << endl << "> ";
-		cin >> name;
+		getline(cin,name);
 	}
 
 	return name;
@@ -308,5 +308,6 @@ int getNumber()
 	    cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
 	    cout << "Invalid input; please re-enter." << endl;
 	}
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	return num;
 }
